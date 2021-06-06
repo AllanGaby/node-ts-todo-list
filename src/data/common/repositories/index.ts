@@ -1,0 +1,6 @@
+export * from './count-entities-repository'
+export * from './create-entity-repository'
+export * from './delete-entity-by-id-repository'
+export * from './get-entity-by-id-repository'
+export * from './list-entities-repository'
+export * from './update-entity-repository'

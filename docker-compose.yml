@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  skeleton_api:
+    container_name: skeleton-api
+    image: node:12
+    working_dir: /opt/skeleton
+    volumes:
+      - ./public/:/opt/skeleton/public/
+      - ./package.json:/opt/skeleton/package.json
+      - ./.env:/opt/skeleton/.env
+    ports:
+      - $PORT:$PORT
+    command: bash -c "npm install --only=prod && npm run build:debug"
