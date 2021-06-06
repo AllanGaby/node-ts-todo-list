@@ -1,7 +1,0 @@
-export * from './active-user-account-request'
-export * from './create-user-account-and-send-mail-request'
-export * from './recover-password-request'
-export * from './request-recover-password-request'
-export * from './update-user-account-request'
-export * from './upload-user-account-avatar-request'
-export * from './user-account-id-params-request'
