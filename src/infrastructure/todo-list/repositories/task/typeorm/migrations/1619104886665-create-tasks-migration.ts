@@ -28,7 +28,8 @@ export class createProfileMigration1619104886665 implements MigrationInterface {
           },
           {
             name: 'change_to_pending',
-            type: 'integer'
+            type: 'integer',
+            default: 0
           },
           {
             name: 'state',

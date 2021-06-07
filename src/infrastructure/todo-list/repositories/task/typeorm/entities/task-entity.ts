@@ -16,7 +16,8 @@ export class TaskEntity extends DefaultEntity implements TaskModel {
 
   @Column({
     type: 'enum',
-    enum: TaskState
+    enum: TaskState,
+    default: TaskState.pending
   })
   state: TaskState
 
