@@ -3,13 +3,13 @@ import { EntityModel, mockEntityModel } from '@/domain/common'
 import { UpdateEntityRepositorySpy } from '@/data/common/mocks'
 
 type sutTypes = {
-  sut: DbUpdateEntityUseCase<EntityModel, EntityModel>
+  sut: DbUpdateEntityUseCase<EntityModel>
   UpdateEntityRepository: UpdateEntityRepositorySpy
 }
 
 const makeSut = (): sutTypes => {
   const UpdateEntityRepository = new UpdateEntityRepositorySpy()
-  const sut = new DbUpdateEntityUseCase<EntityModel, EntityModel>(UpdateEntityRepository)
+  const sut = new DbUpdateEntityUseCase<EntityModel>(UpdateEntityRepository)
   return {
     sut,
     UpdateEntityRepository

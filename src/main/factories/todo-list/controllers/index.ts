@@ -1,2 +1,5 @@
 export * from './create-task-controller-factory'
+export * from './delete-task-by-id-controller-factory'
+export * from './get-task-by-id-controller-factory'
 export * from './list-tasks-controller-factory'
+export * from './update-task-by-id-controller-factory'

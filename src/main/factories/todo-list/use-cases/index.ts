@@ -1,2 +1,5 @@
 export * from './create-task-use-case-factory'
+export * from './delete-task-by-id-use-case-factory'
+export * from './get-task-by-id-use-case-factory'
 export * from './list-tasks-use-case-factory'
+export * from './update-task-by-id-use-case-factory'

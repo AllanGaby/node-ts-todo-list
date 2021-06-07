@@ -1,11 +1,11 @@
 import { routeAdapter } from '@/main/common/adapters/express'
-import { CreateEntityControllerProps, makeCreateEntityController } from '@/main/factories/todo-list/controllers'
+import { CreateTaskControllerProps, makeCreateTaskController } from '@/main/factories/todo-list/controllers'
 import { Router } from 'express'
 
-export type CreateTaskRouteProps = CreateEntityControllerProps
+export type CreateTaskRouteProps = CreateTaskControllerProps
 
-export const makeCreateTaskRoute = (props: CreateEntityControllerProps): Router => {
+export const makeCreateTaskRoute = (props: CreateTaskControllerProps): Router => {
   return Router()
     .post('/',
-      routeAdapter(makeCreateEntityController(props)))
+      routeAdapter(makeCreateTaskController(props)))
 }
