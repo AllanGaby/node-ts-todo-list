@@ -1,2 +1,5 @@
+export * from './change-task-to-concluded-use-case-mock'
+export * from './change-task-to-pending-dto-mock'
+export * from './change-task-to-pending-use-case-mock'
 export * from './task-model-mock'
 export * from './task-state-model-mock'
