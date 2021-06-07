@@ -35,6 +35,7 @@ export class createProfileMigration1619104886665 implements MigrationInterface {
             name: 'state',
             type: 'enum',
             enumName: 'tasks.state',
+            default: "'pending'",
             enum: [
               TaskState.pending,
               TaskState.concluded
