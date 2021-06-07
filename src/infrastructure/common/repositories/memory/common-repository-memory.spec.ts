@@ -61,7 +61,7 @@ describe('CommonRepositoryMemory', () => {
       sut.entities.push(mockEntityModel())
       sut.entities.push(mockEntityModel())
       const list = await sut.list(sut.entities[0])
-      expect(list).toEqual(sut.entities[0])
+      expect(list).toEqual([sut.entities[0]])
     })
   })
 

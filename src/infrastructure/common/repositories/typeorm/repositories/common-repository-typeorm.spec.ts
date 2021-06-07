@@ -3,7 +3,6 @@ import { mockEntityModel } from '@/domain/common'
 import { TypeOrmRepositorySpy } from '@/infrastructure/common/mocks'
 import { DefaultEntity } from '@/infrastructure/common/repositories'
 import { getRepository } from 'typeorm'
-import { mockListEntitiesRepositoryDTO } from '@/data/common/mocks'
 import faker from 'faker'
 
 jest.mock('typeorm', () => ({
@@ -67,7 +66,7 @@ describe('CommonRepositoryTypeORM', () => {
     test('Should call Find with correct value if textToSearch is provided', async () => {
       const { sut } = makeSut()
       const findSpy = jest.spyOn(sut.repositoryTypeORM, 'find')
-      const request = mockListEntitiesRepositoryDTO()
+      const request = mockEntityModel()
       await sut.list(request)
       expect(findSpy).toHaveBeenCalledWith({
         where: request

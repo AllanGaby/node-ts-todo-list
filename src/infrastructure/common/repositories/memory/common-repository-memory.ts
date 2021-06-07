@@ -25,7 +25,14 @@ export class CommonRepositoryMemory<EntityType extends EntityModel> implements G
   }
 
   async list (filter: Partial<EntityType>): Promise<EntityType[]> {
-    return this.entities
+    return this.entities.filter(item => {
+      const keys = Object.keys(filter)
+      let filtered: boolean = true
+      keys.forEach(key => {
+        filtered = filtered && item[key] === filter[key]
+      })
+      return filtered
+    })
   }
 
   async create (params: CreateEntityDTO<EntityType>): Promise<EntityType> {

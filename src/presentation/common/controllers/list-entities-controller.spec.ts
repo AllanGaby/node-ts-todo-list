@@ -22,13 +22,7 @@ describe('ListEntitiesController', () => {
     const { sut, listEntitiesUseCase } = makeSut()
     const request = mockListEntitiesRequest()
     await sut.handle(request)
-    expect(listEntitiesUseCase.filter).toEqual({
-      page: request.queryParams.page,
-      textToSearch: request.queryParams.search,
-      recordsPerPage: request.queryParams.size,
-      orderColumn: request.queryParams.order,
-      orderDirection: request.queryParams.direction
-    })
+    expect(listEntitiesUseCase.filter).toEqual(request.queryParams)
   })
 
   test('Should return serverError if ListEntitiesUseCase return expcetion', async () => {
