@@ -21,6 +21,7 @@ export class ListEntitiesController<RecordType = object> implements Controller<a
       })
       return ok(list)
     } catch (error) {
+      console.log(error)
       return serverError(error)
     }
   }

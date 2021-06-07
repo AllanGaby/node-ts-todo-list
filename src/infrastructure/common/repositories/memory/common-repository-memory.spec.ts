@@ -1,6 +1,5 @@
 import { CommonRepositoryMemory } from './common-repository-memory'
 import { EntityModel, mockEntityModel } from '@/domain/common'
-import { mockListEntitiesRepositoryDTO } from '@/data/common/mocks'
 import faker from 'faker'
 
 type sutTypes = {
@@ -8,7 +7,7 @@ type sutTypes = {
 }
 
 const makeSut = (): sutTypes => ({
-  sut: new CommonRepositoryMemory<EntityModel>(['id'])
+  sut: new CommonRepositoryMemory<EntityModel>()
 })
 
 describe('CommonRepositoryMemory', () => {
@@ -51,26 +50,8 @@ describe('CommonRepositoryMemory', () => {
   describe('List Method', () => {
     test('Should return undefined if entity not found by name', async () => {
       const { sut } = makeSut()
-      const entity = await sut.list(mockListEntitiesRepositoryDTO())
+      const entity = await sut.list(mockEntityModel())
       expect(entity).toEqual([])
-    })
-
-    test('Should return a entity list with same name provided', async () => {
-      const { sut } = makeSut()
-      const mockedEntity = mockEntityModel()
-      sut.entities.push(mockEntityModel())
-      sut.entities.push(mockEntityModel())
-      sut.entities.push(mockedEntity)
-      sut.entities.push(mockedEntity)
-      const list = await sut.list({
-        textToSearch: mockedEntity.id,
-        skip: faker.random.number(),
-        recordsPerPage: faker.random.number()
-      })
-      expect(list).toEqual([
-        mockedEntity,
-        mockedEntity
-      ])
     })
 
     test('Should return a complete list if textToSearch is not provided', async () => {
@@ -79,11 +60,8 @@ describe('CommonRepositoryMemory', () => {
       sut.entities.push(mockEntityModel())
       sut.entities.push(mockEntityModel())
       sut.entities.push(mockEntityModel())
-      const list = await sut.list({
-        skip: faker.random.number(),
-        recordsPerPage: faker.random.number()
-      })
-      expect(list).toEqual(sut.entities)
+      const list = await sut.list(sut.entities[0])
+      expect(list).toEqual(sut.entities[0])
     })
   })
 

@@ -3,8 +3,8 @@ import { mockEntityModel } from '@/domain/common'
 import { TypeOrmRepositorySpy } from '@/infrastructure/common/mocks'
 import { DefaultEntity } from '@/infrastructure/common/repositories'
 import { getRepository } from 'typeorm'
-import faker from 'faker'
 import { mockListEntitiesRepositoryDTO } from '@/data/common/mocks'
+import faker from 'faker'
 
 jest.mock('typeorm', () => ({
   Entity: () => {},
@@ -24,16 +24,13 @@ jest.mock('typeorm', () => ({
 
 type sutTypes = {
   sut: CommonRepositoryTypeORM<DefaultEntity>
-  columns: string[]
 }
 
 const makeSut = (): sutTypes => {
-  const columns = [faker.database.column(), faker.database.column()]
-  const sut = new CommonRepositoryTypeORM<DefaultEntity>(columns)
+  const sut = new CommonRepositoryTypeORM<DefaultEntity>()
   sut.repositoryTypeORM = getRepository<DefaultEntity>(DefaultEntity)
   return {
-    sut,
-    columns
+    sut
   }
 }
 
@@ -68,42 +65,13 @@ describe('CommonRepositoryTypeORM', () => {
 
   describe('List Method', () => {
     test('Should call Find with correct value if textToSearch is provided', async () => {
-      const { sut, columns } = makeSut()
-      const findSpy = jest.spyOn(sut.repositoryTypeORM, 'find')
-      const request = mockListEntitiesRepositoryDTO()
-      await sut.list(request)
-      const { textToSearch } = request
-      const where = columns.reduce((where, column): string => {
-        if (where) {
-          return `${where} OR (${column} ilike '%${textToSearch}%')`
-        }
-        return `(${column} ilike '%${textToSearch}%')`
-      }, '')
-      expect(findSpy).toHaveBeenCalledWith({
-        where,
-        skip: request.skip,
-        take: request.recordsPerPage
-      })
-    })
-
-    test('Should call Find with correct value without textToSearch', async () => {
       const { sut } = makeSut()
       const findSpy = jest.spyOn(sut.repositoryTypeORM, 'find')
       const request = mockListEntitiesRepositoryDTO()
-      delete request.textToSearch
       await sut.list(request)
       expect(findSpy).toHaveBeenCalledWith({
-        skip: request.skip,
-        take: request.recordsPerPage
+        where: request
       })
-    })
-
-    test('Should return same Find return', async () => {
-      const { sut } = makeSut()
-      const entity = mockEntityModel()
-      jest.spyOn(sut.repositoryTypeORM, 'find').mockResolvedValue([entity, entity])
-      const findEntity = await sut.list(mockListEntitiesRepositoryDTO())
-      expect(findEntity).toEqual([entity, entity])
     })
   })
 

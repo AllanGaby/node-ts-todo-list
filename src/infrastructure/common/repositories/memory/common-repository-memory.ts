@@ -2,7 +2,6 @@ import {
   GetEntityByIdRepository,
   DeleteEntityByIdRepository,
   ListEntitiesRepository,
-  ListEntitiesRepositoryDTO,
   CreateEntityRepository,
   UpdateEntityRepository
 } from '@/data/common/repositories'
@@ -12,7 +11,7 @@ import { v4 } from 'uuid'
 export class CommonRepositoryMemory<EntityType extends EntityModel> implements GetEntityByIdRepository<EntityModel>, DeleteEntityByIdRepository<EntityModel>, ListEntitiesRepository<EntityModel>, CreateEntityRepository<EntityType>, UpdateEntityRepository<EntityType> {
   entities: EntityType[]
 
-  constructor (private readonly columnsToListFilter: string[]) {
+  constructor () {
     this.entities = []
   }
 
@@ -25,10 +24,7 @@ export class CommonRepositoryMemory<EntityType extends EntityModel> implements G
     return undefined
   }
 
-  async list (filter: ListEntitiesRepositoryDTO): Promise<EntityType[]> {
-    if (filter.textToSearch) {
-      return this.entities.filter(entitie => entitie[this.columnsToListFilter[0]].includes(filter.textToSearch))
-    }
+  async list (filter: Partial<EntityType>): Promise<EntityType[]> {
     return this.entities
   }
 

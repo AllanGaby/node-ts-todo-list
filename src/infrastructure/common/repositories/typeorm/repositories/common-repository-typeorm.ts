@@ -1,7 +1,6 @@
 import {
   GetEntityByIdRepository,
   DeleteEntityByIdRepository,
-  ListEntitiesRepositoryDTO,
   CreateEntityRepository,
   UpdateEntityRepository
 } from '@/data/common/repositories'
@@ -12,8 +11,6 @@ import { DefaultEntity } from '@/infrastructure/common/repositories'
 export class CommonRepositoryTypeORM<EntityType extends DefaultEntity> implements GetEntityByIdRepository<EntityType>, DeleteEntityByIdRepository<EntityType>, CreateEntityRepository<EntityType>, UpdateEntityRepository<EntityType> {
   public repositoryTypeORM: Repository<EntityType>
 
-  constructor (private readonly columnsToListFilter: string[]) { }
-
   async getById (entityId: string): Promise<EntityType> {
     return await this.repositoryTypeORM.findOne(entityId)
   }
@@ -23,24 +20,9 @@ export class CommonRepositoryTypeORM<EntityType extends DefaultEntity> implement
     return undefined
   }
 
-  async list ({ textToSearch, skip, recordsPerPage }: ListEntitiesRepositoryDTO): Promise<EntityType[]> {
-    if (textToSearch) {
-      const where = this.columnsToListFilter.reduce((where, column): string => {
-        if (where) {
-          return `${where} OR (${column} ilike '%${textToSearch}%')`
-        }
-        return `(${column} ilike '%${textToSearch}%')`
-      }, '')
-
-      return await this.repositoryTypeORM.find({
-        where,
-        skip,
-        take: recordsPerPage
-      })
-    }
+  async list (filter: Partial<EntityType>): Promise<EntityType[]> {
     return await this.repositoryTypeORM.find({
-      skip,
-      take: recordsPerPage
+      where: filter
     })
   }
 
