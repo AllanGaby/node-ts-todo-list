@@ -1,10 +1,10 @@
-import { ListTasksRouteProps, makeListTasksRoute } from './list-tasks-route'
+import { TasksRouteProps, makeTasksRoute } from './task'
 import { Router } from 'express'
 
-export type TasksGenericRouteProps =
-ListTasksRouteProps
+export type TodoRouteProps =
+TasksRouteProps
 
-export const makeTasksGenericRoute = (props: TasksGenericRouteProps): Router => {
+export const makeTodoRoute = (props: TodoRouteProps): Router => {
   return Router()
-    .use('/todo', makeListTasksRoute(props))
+    .use('/todo', makeTasksRoute(props))
 }

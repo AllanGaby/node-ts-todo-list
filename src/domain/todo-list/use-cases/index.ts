@@ -1,1 +1,5 @@
+export * from './create-task-use-case'
+export * from './delete-task-by-id-use-case'
+export * from './get-task-by-id-use-case'
 export * from './list-tasks-use-case'
+export * from './update-task-by-id-use-case'

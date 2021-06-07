@@ -5,11 +5,11 @@ import { mockTaskModel } from '@/domain/todo-list'
 import http from 'http'
 import supertest, { SuperAgentTest } from 'supertest'
 
-const url = '/api/todo/list'
+const url = '/api/todo/task/list'
 let server: http.Server
 let agent: SuperAgentTest
 
-describe('GET /list - List Tasks', () => {
+describe('GET /task/list - List Tasks', () => {
   beforeEach((done) => {
     server = app.listen(4000, (): void => {
       agent = supertest.agent(server)
