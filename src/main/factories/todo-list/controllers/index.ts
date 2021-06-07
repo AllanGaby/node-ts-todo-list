@@ -1,3 +1,5 @@
+export * from './change-task-to-concluded-controller-factory'
+export * from './change-task-to-pending-controller-factory'
 export * from './create-task-controller-factory'
 export * from './delete-task-by-id-controller-factory'
 export * from './get-task-by-id-controller-factory'

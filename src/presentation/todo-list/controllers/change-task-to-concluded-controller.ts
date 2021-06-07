@@ -13,7 +13,7 @@ export class ChangeTaskToConcludedController implements Controller<any, ChangeTa
   ) {}
 
   async handle (request: HttpRequest<any, any, any, UpdateEntityRequestDefault>): Promise<HttpResponse<ChangeTaskToConcludedResponse>> {
-    const errors = this.validator.validate(Object(request.body))
+    const errors = this.validator.validate(Object(request.params))
     if (errors) {
       return unprocessableEntity(errors)
     }

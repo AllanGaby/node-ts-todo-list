@@ -29,7 +29,7 @@ describe('ChangeTaskToConcludedController', () => {
     const request = mockUpdateEntityRequest()
     const validateSpy = jest.spyOn(validator, 'validate')
     await sut.handle(request)
-    expect(validateSpy).toHaveBeenCalledWith(Object(request.body))
+    expect(validateSpy).toHaveBeenCalledWith(Object(request.params))
   })
 
   test('Should return unprocessableEntity if validator fails', async () => {

@@ -5,7 +5,7 @@ import faker from 'faker'
 
 export const mockChangeTaskToPendingRequest = (): HttpRequest<ChangeTaskToPendingRequest, any, any, EntityIdParamsRequestDefault> => ({
   body: {
-    password: faker.internet.password()
+    password: 'TrabalheNaSaipos'
   },
   params: {
     id: faker.random.uuid()

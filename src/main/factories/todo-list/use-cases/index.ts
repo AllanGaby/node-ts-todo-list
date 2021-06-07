@@ -1,3 +1,5 @@
+export * from './change-task-to-concluded-use-case-factory'
+export * from './change-task-to-pending-use-case-factory'
 export * from './create-task-use-case-factory'
 export * from './delete-task-by-id-use-case-factory'
 export * from './get-task-by-id-use-case-factory'
