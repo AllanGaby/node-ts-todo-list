@@ -11,6 +11,7 @@ module.exports = {
     '!**/index.ts',
     '!**/migrations/**.ts',
     '!**/entities/**.ts',
+    '!**/requests/**.ts',
     '**/routes/**'
   ],
   testResultsProcessor: 'jest-sonar-reporter',
