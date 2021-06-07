@@ -6,17 +6,4 @@ coverage
 /data
 .env
 ormconfig.env
-*.pem
 /.husky
-temp/*
-uploads/*
-uploads/accounts/*
-uploads/accounts/avatar/*
-!temp/.gitkeep
-!uploads/.gitkeep
-!uploads/accounts
-!uploads/accounts/.gitkeep
-!uploads/accounts/avatar
-!uploads/accounts/avatar/.gitkeep
-!uploads/accounts/avatar/test.jpg
-!uploads/test.jpg
