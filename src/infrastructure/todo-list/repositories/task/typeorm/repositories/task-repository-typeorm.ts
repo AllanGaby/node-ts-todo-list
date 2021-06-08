@@ -7,4 +7,18 @@ export class TaskRepositoryTypeORM extends CommonRepositoryTypeORM<TaskEntity> {
     super()
     this.repositoryTypeORM = getRepository<TaskEntity>(TaskEntity)
   }
+
+  async update (params: Partial<TaskEntity>): Promise<TaskEntity> {
+    const entity = await this.repositoryTypeORM.findOne(params.id)
+    if (!entity) {
+      return undefined
+    }
+    const updatedEntity: TaskEntity = {
+      ...entity,
+      ...params,
+      change_to_pending: entity.change_to_pending + 1
+    }
+    await this.repositoryTypeORM.save<any>(updatedEntity)
+    return updatedEntity
+  }
 }
