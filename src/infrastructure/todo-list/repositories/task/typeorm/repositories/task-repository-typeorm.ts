@@ -1,6 +1,7 @@
 import { TaskEntity } from '@/infrastructure/todo-list/repositories/task/typeorm'
 import { CommonRepositoryTypeORM } from '@/infrastructure/common/repositories'
 import { getRepository } from 'typeorm'
+import { TaskState } from '@/domain/todo-list'
 
 export class TaskRepositoryTypeORM extends CommonRepositoryTypeORM<TaskEntity> {
   constructor () {
@@ -15,8 +16,10 @@ export class TaskRepositoryTypeORM extends CommonRepositoryTypeORM<TaskEntity> {
     }
     const updatedEntity: TaskEntity = {
       ...entity,
-      ...params,
-      change_to_pending: entity.change_to_pending + 1
+      ...params
+    }
+    if (updatedEntity.state === TaskState.concluded) {
+      updatedEntity.change_to_pending = updatedEntity.change_to_pending + 1
     }
     await this.repositoryTypeORM.save<any>(updatedEntity)
     return updatedEntity
